@@ -1,0 +1,230 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "IISEDUXdrfTM",
+        "outputId": "10e4a7f9-dce5-41b4-a866-23862469aace"
+      },
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndentationError",
+          "evalue": "unexpected indent (3191782700.py, line 18)",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_4864/3191782700.py\"\u001b[0;36m, line \u001b[0;32m18\u001b[0m\n\u001b[0;31m    df = pd.DataFrame(data)\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m unexpected indent\n"
+          ]
+        }
+      ],
+      "source": [
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "# 1. Create Dataset\n",
+        "data = {\n",
+        "    \"Employee\": [\n",
+        "            \"Anu\", \"Bala\", \"Charan\", \"Divya\", \"Esha\",\n",
+        "                    \"Farhan\", \"Gita\", \"Hari\", \"Isha\", \"Jaya\",\n",
+        "                            \"Kiran\", \"Latha\", \"Manoj\", \"Nila\", \"Om\"\n",
+        "                                ],\n",
+        "                                    \"Salary\": [\n",
+        "                                            25000, 28000, 30000, 32000, 35000,\n",
+        "                                                    36000, 38000, 40000, 42000, 45000,\n",
+        "                                                            47000, 50000, 52000, 55000, 200000\n",
+        "                                                                ]\n",
+        "                                                                }\n",
+        "\n",
+        "                                                                df = pd.DataFrame(data)\n",
+        "\n",
+        "                                                                print(\"Original Dataset:\")\n",
+        "                                                                print(df.to_string(index=False))\n",
+        "\n",
+        "                                                                # 2. Create Box Plot\n",
+        "                                                                plt.figure(figsize=(8, 5))\n",
+        "                                                                plt.boxplot(df[\"Salary\"])\n",
+        "                                                                plt.title(\"Outlier Detection in Employee Salaries\")\n",
+        "                                                                plt.ylabel(\"Salary\")\n",
+        "                                                                plt.grid(axis=\"y\", alpha=0.3)\n",
+        "                                                                plt.show()\n",
+        "\n",
+        "                                                                # 3. Calculate IQR\n",
+        "                                                                Q1 = df[\"Salary\"].quantile(0.25)\n",
+        "                                                                Q3 = df[\"Salary\"].quantile(0.75)\n",
+        "                                                                IQR = Q3 - Q1\n",
+        "\n",
+        "                                                                lower_bound = Q1 - 1.5 * IQR\n",
+        "                                                                upper_bound = Q3 + 1.5 * IQR\n",
+        "\n",
+        "                                                                print(\"\\nQ1:\", Q1)\n",
+        "                                                                print(\"Q3:\", Q3)\n",
+        "                                                                print(\"IQR:\", IQR)\n",
+        "                                                                print(\"Lower Bound:\", lower_bound)\n",
+        "                                                                print(\"Upper Bound:\", upper_bound)\n",
+        "\n",
+        "                                                                # 4. Identify Potential Outliers\n",
+        "                                                                outliers = df[\n",
+        "                                                                    (df[\"Salary\"] < lower_bound) |\n",
+        "                                                                        (df[\"Salary\"] > upper_bound)\n",
+        "                                                                        ]\n",
+        "\n",
+        "                                                                        print(\"\\nPotential Outliers:\")\n",
+        "                                                                        if outliers.empty:\n",
+        "                                                                            print(\"No potential outliers found.\")\n",
+        "                                                                            else:\n",
+        "                                                                                print(outliers.to_string(index=False))\n",
+        "\n",
+        "                                                                                # 5. Observations\n",
+        "                                                                                print(\"\\nObservations:\")\n",
+        "                                                                                print(\"1. The box plot shows the distribution of employee salaries.\")\n",
+        "                                                                                print(\"2. The IQR method identifies unusually low or high salary values.\")\n",
+        "                                                                                print(\"3. A salary of 200000 is expected to be flagged as a potential outlier.\")\n",
+        "                                                                                print(\"4. Potential outliers should be checked before removing them.\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "# Create DataFrame directly\n",
+        "df = pd.DataFrame({\n",
+        "    \"Employee\": [\"Anu\", \"Bala\", \"Charan\", \"Divya\", \"Esha\",\n",
+        "                     \"Farhan\", \"Gita\", \"Hari\", \"Isha\", \"Jaya\",\n",
+        "                                      \"Kiran\", \"Latha\", \"Manoj\", \"Nila\", \"Om\"],\n",
+        "                                          \"Salary\": [25000, 28000, 30000, 32000, 35000,\n",
+        "                                                         36000, 38000, 40000, 42000, 45000,\n",
+        "                                                                        47000, 50000, 52000, 55000, 200000]\n",
+        "                                                                        })\n",
+        "\n",
+        "                                                                        print(\"Original Dataset:\")\n",
+        "                                                                        print(df)\n",
+        "\n",
+        "                                                                        # Box Plot\n",
+        "                                                                        plt.figure(figsize=(8, 5))\n",
+        "                                                                        plt.boxplot(df[\"Salary\"])\n",
+        "                                                                        plt.title(\"Employee Salary Outlier Detection\")\n",
+        "                                                                        plt.ylabel(\"Salary\")\n",
+        "                                                                        plt.show()\n",
+        "\n",
+        "                                                                        # IQR Calculation\n",
+        "                                                                        Q1 = df[\"Salary\"].quantile(0.25)\n",
+        "                                                                        Q3 = df[\"Salary\"].quantile(0.75)\n",
+        "                                                                        IQR = Q3 - Q1\n",
+        "\n",
+        "                                                                        lower = Q1 - 1.5 * IQR\n",
+        "                                                                        upper = Q3 + 1.5 * IQR\n",
+        "\n",
+        "                                                                        # Find Outliers\n",
+        "                                                                        outliers = df[\n",
+        "                                                                            (df[\"Salary\"] < lower) |\n",
+        "                                                                                (df[\"Salary\"] > upper)\n",
+        "                                                                                ]\n",
+        "\n",
+        "                                                                                print(\"\\nPotential Outliers:\")\n",
+        "                                                                                print(outliers)\n",
+        "\n",
+        "                                                                                print(\"\\nObservations:\")\n",
+        "                                                                                print(\"1. The box plot shows the salary distribution.\")\n",
+        "                                                                                print(\"2. IQR is used to identify potential outliers.\")\n",
+        "                                                                                print(\"3. Salary values outside the IQR boundaries are flagged.\")"
+      ],
+      "metadata": {
+        "id": "apLJ74UIsBu8",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 196
+        },
+        "outputId": "2bd51a28-b737-4bd7-d486-68e6b5a57381"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndentationError",
+          "evalue": "unexpected indent (1490115400.py, line 14)",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_4864/1490115400.py\"\u001b[0;36m, line \u001b[0;32m14\u001b[0m\n\u001b[0;31m    print(\"Original Dataset:\")\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m unexpected indent\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "df = pd.DataFrame({\n",
+        "    \"Employee\": [\"Anu\", \"Bala\", \"Charan\", \"Divya\", \"Esha\",\n",
+        "                 \"Farhan\", \"Gita\", \"Hari\", \"Isha\", \"Jaya\",\n",
+        "                 \"Kiran\", \"Latha\", \"Manoj\", \"Nila\", \"Om\"],\n",
+        "    \"Salary\": [25000, 28000, 30000, 32000, 35000,\n",
+        "               36000, 38000, 40000, 42000, 45000,\n",
+        "               47000, 50000, 52000, 55000, 200000]\n",
+        "})\n",
+        "\n",
+        "print(\"Original Dataset:\")\n",
+        "print(df.to_string(index=False))\n",
+        "\n",
+        "plt.figure(figsize=(8, 5))\n",
+        "plt.boxplot(df[\"Salary\"])\n",
+        "plt.title(\"Employee Salary Outlier Detection\")\n",
+        "plt.ylabel(\"Salary\")\n",
+        "plt.grid(axis=\"y\")\n",
+        "plt.show()\n",
+        "\n",
+        "Q1 = df[\"Salary\"].quantile(0.25)\n",
+        "Q3 = df[\"Salary\"].quantile(0.75)\n",
+        "IQR = Q3 - Q1\n",
+        "\n",
+        "lower = Q1 - 1.5 * IQR\n",
+        "upper = Q3 + 1.5 * IQR\n",
+        "\n",
+        "outliers = df[\n",
+        "    (df[\"Salary\"] < lower) |\n",
+        "    (df[\"Salary\"] > upper)\n",
+        "]\n",
+        "\n",
+        "print(\"\\nQ1:\", Q1)\n",
+        "print(\"Q3:\", Q3)\n",
+        "print(\"IQR:\", IQR)\n",
+        "print(\"Lower Bound:\", lower)\n",
+        "print(\"Upper Bound:\", upper)\n",
+        "\n",
+        "print(\"\\nPotential Outliers:\")\n",
+        "print(outliers.to_string(index=False))\n",
+        "\n",
+        "print(\"\\nObservations:\")\n",
+        "print(\"1. The box plot displays the salary distribution.\")\n",
+        "print(\"2. The IQR method identifies potential outliers.\")\n",
+        "print(\"3. The salary of 200000 is expected to be flagged as an outlier.\")\n",
+        "print(\"4. Potential outliers should be investigated before removal.\")"
+      ],
+      "metadata": {
+        "id": "0DqmE7rRstaE"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
